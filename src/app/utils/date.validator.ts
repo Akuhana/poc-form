@@ -10,5 +10,20 @@ export function pastDateValidator(control: AbstractControl): ValidationErrors | 
   const selected = new Date(value);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  return selected >= today ? { futureDate: true } : null;
+
+  // 110 Jahre zurückrechnen
+  const maxPast = new Date(today);
+  maxPast.setFullYear(maxPast.getFullYear() - 110);
+
+  const errors: ValidationErrors = {};
+
+  if (selected >= today) {
+    errors['futureDate'] = true;
+  }
+  if (selected < maxPast) {
+    errors['tooOld'] = true;
+  }
+
+  // Wenn es mindestens ein Flag gibt, Fehlerobjekt zurückgeben, sonst null
+  return Object.keys(errors).length ? errors : null;
 }

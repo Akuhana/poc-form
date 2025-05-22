@@ -55,6 +55,7 @@
             *ngIf="c('birthDate').touched && c('birthDate').errors as e">
             <ng-container *ngIf="e['required']">Pflichtfeld</ng-container>
             <ng-container *ngIf="e['futureDate']">Datum muss in der Vergangenheit liegen</ng-container>
+            <ng-container *ngIf="e['tooOld']">Datum darf nicht älter als 110 Jahre sein</ng-container>
         </small>
     </div>
 
