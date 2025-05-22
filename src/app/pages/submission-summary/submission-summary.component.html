@@ -1,0 +1,22 @@
+<section
+  class="mx-auto mt-8 w-full max-w-xl bg-surface-2 p-6 rounded-xl shadow-sm space-y-6"
+>
+  <h2 class="text-3xl font-extrabold text-primary">Zusammenfassung</h2>
+
+  <dl class="divide-y divide-primary/10">
+    <ng-container *ngFor="let item of items">
+      <div class="py-3 grid grid-cols-[auto,1fr] gap-x-4">
+        <dt class="text-sm text-primary">{{ item.label }}</dt>
+        <dd class="text-2xl font-bold text-primary/90 ">{{ item.value || '-' }}</dd>
+      </div>
+    </ng-container>
+  </dl>
+
+  <button
+    type="button"
+    routerLink="/"
+    class="mt-4 px-6 py-2 rounded-md bg-secondary text-primary hover:brightness-90 cursor-pointer transition-colors block mx-auto w-fit"
+  >
+    Neues Formular
+  </button>
+</section>

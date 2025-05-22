@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@theme {
+  --color-surface: #EEEEEE;
+  --color-surface-2: #DDDDDD;
+  --color-primary: #2A4759;
+  --color-secondary: #F79B72;
+}
+
+@layer base {
+  html { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+  body { 
+    @apply m-4;
+    @apply m-4 bg-surface text-primary;
+    }  
+}
+
+
