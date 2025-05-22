@@ -1,0 +1,96 @@
+<form [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      autocomplete="off"
+      class="person-form">
+
+    <!-- Anrede -->
+    <div class="form-row">
+        <label for="salutation">Anrede <span class="required">*</span></label>
+        <select id="salutation" formControlName="salutation">
+            <option value="" disabled>Bitte wählen</option>
+            <option value="Herr">Herr</option>
+            <option value="Frau">Frau</option>
+            <option value="Divers">Divers</option>
+        </select>
+        <small class="error" *ngIf="c('salutation').touched && c('salutation').invalid">
+            Pflichtfeld
+        </small>
+    </div>
+
+    <!-- Vor- und Nachname -->
+    <div class="form-row two-columns">
+        <div>
+            <label for="firstName">Vorname <span class="required">*</span></label>
+            <input id="firstName" type="text" formControlName="firstName">
+            <small class="error" *ngIf="c('firstName').touched && c('firstName').invalid">
+                Pflichtfeld
+            </small>
+        </div>
+
+        <div>
+            <label for="lastName">Nachname <span class="required">*</span></label>
+            <input id="lastName" type="text" formControlName="lastName">
+            <small class="error" *ngIf="c('lastName').touched && c('lastName').invalid">
+                Pflichtfeld
+            </small>
+        </div>
+    </div>
+
+    <!-- Geburtsdatum -->
+    <div class="form-row">
+        <label for="birthDate">Geburtsdatum <span class="required">*</span></label>
+        <input id="birthDate" type="date" formControlName="birthDate">
+        <small class="error"
+            *ngIf="c('birthDate').touched && c('birthDate').errors as e">
+            <ng-container *ngIf="e['required']">Pflichtfeld</ng-container>
+            <ng-container *ngIf="e['futureDate']">Datum muss in der Vergangenheit liegen</ng-container>
+        </small>
+    </div>
+
+    <!-- Adresse -->
+    <div class="form-row">
+        <label for="address">Adresse</label>
+        <input id="address" type="text" formControlName="address">
+    </div>
+
+    <!-- PLZ und Ort -->
+    <div class="form-row two-columns">
+        <div>
+            <label for="zip">PLZ</label>
+            <input id="zip" type="text" maxlength="5" formControlName="zip">
+            <small class="error" *ngIf="c('zip').touched && c('zip').errors?.['pattern']">
+                PLZ muss aus 5 Ziffern bestehen
+            </small>
+        </div>
+
+        <div>
+            <label for="city">Ort</label>
+            <input id="city" type="text" formControlName="city">
+        </div>
+    </div>
+
+    <!-- Land -->
+    <div class="form-row">
+        <label for="country">Land <span class="required">*</span></label>
+
+        <select id="country" formControlName="country">
+            <option value="" disabled>Bitte wählen</option>
+            <option *ngFor="let c of countries$ | async"
+                    [value]="c.code">
+            {{ c.name }}
+            </option>
+        </select>
+
+        <small class="error"
+                *ngIf="c('country').touched && c('country').invalid">
+            Pflichtfeld
+        </small>
+    </div>
+
+    <!-- Submit -->
+    <div class="form-row submit-row">
+        <button type="submit" [disabled]="form.invalid">
+        Submit
+        </button>
+    </div>
+</form>
