@@ -1,12 +1,20 @@
 <form [formGroup]="form"
       (ngSubmit)="onSubmit()"
       autocomplete="off"
-      class="person-form">
+      class="
+        person-form
+        bg-surface-2
+        rounded-xl
+        p-6
+        shadow-sm
+        w-full max-w-xl
+        space-y-4
+        ">
 
     <!-- Anrede -->
     <div class="form-row">
         <label for="salutation">Anrede <span class="required">*</span></label>
-        <select id="salutation" formControlName="salutation">
+        <select id="salutation" formControlName="salutation" >
             <option value="" disabled>Bitte wählen</option>
             <option value="Herr">Herr</option>
             <option value="Frau">Frau</option>
@@ -21,7 +29,8 @@
     <div class="form-row two-columns">
         <div>
             <label for="firstName">Vorname <span class="required">*</span></label>
-            <input id="firstName" type="text" formControlName="firstName">
+            <input id="firstName" type="text" formControlName="firstName"
+                class="px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
             <small class="error" *ngIf="c('firstName').touched && c('firstName').invalid">
                 Pflichtfeld
             </small>
@@ -29,7 +38,8 @@
 
         <div>
             <label for="lastName">Nachname <span class="required">*</span></label>
-            <input id="lastName" type="text" formControlName="lastName">
+            <input id="lastName" type="text" formControlName="lastName"
+                class="px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
             <small class="error" *ngIf="c('lastName').touched && c('lastName').invalid">
                 Pflichtfeld
             </small>
@@ -39,25 +49,29 @@
     <!-- Geburtsdatum -->
     <div class="form-row">
         <label for="birthDate">Geburtsdatum <span class="required">*</span></label>
-        <input id="birthDate" type="date" formControlName="birthDate">
+        <input id="birthDate" type="date" formControlName="birthDate"
+            class="px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
         <small class="error"
             *ngIf="c('birthDate').touched && c('birthDate').errors as e">
             <ng-container *ngIf="e['required']">Pflichtfeld</ng-container>
             <ng-container *ngIf="e['futureDate']">Datum muss in der Vergangenheit liegen</ng-container>
+            <ng-container *ngIf="e['tooOld']">Datum darf nicht älter als 110 Jahre sein</ng-container>
         </small>
     </div>
 
     <!-- Adresse -->
     <div class="form-row">
         <label for="address">Adresse</label>
-        <input id="address" type="text" formControlName="address">
+        <input id="address" type="text" formControlName="address"
+            class="px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
     </div>
 
     <!-- PLZ und Ort -->
     <div class="form-row two-columns">
         <div>
             <label for="zip">PLZ</label>
-            <input id="zip" type="text" maxlength="5" formControlName="zip">
+            <input id="zip" type="text" maxlength="5" formControlName="zip"
+                class="px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
             <small class="error" *ngIf="c('zip').touched && c('zip').errors?.['pattern']">
                 PLZ muss aus 5 Ziffern bestehen
             </small>
@@ -65,7 +79,8 @@
 
         <div>
             <label for="city">Ort</label>
-            <input id="city" type="text" formControlName="city">
+            <input id="city" type="text" formControlName="city"
+                class="px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
         </div>
     </div>
 
@@ -89,8 +104,18 @@
 
     <!-- Submit -->
     <div class="form-row submit-row">
-        <button type="submit" [disabled]="form.invalid">
-        Submit
+        <button
+            type="submit"
+            [disabled]="form.invalid"
+            class="
+                px-8 py-2 rounded-md
+                bg-secondary text-primary
+                hover:brightness-90
+                disabled:opacity-50 disabled:cursor-not-allowed
+                transition-colors duration-200 ease-in-out
+                "
+        >
+            Absenden
         </button>
     </div>
 </form>
