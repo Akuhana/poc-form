@@ -25,6 +25,7 @@ export class SubmissionSummaryComponent implements OnInit {
     country  : 'Land',
   };
 
+  // On Init benutzen, damit man async await benutzen können, um die Länder zu laden
   async ngOnInit(): Promise<void> {
     const data = history.state?.formData ?? {};
 
